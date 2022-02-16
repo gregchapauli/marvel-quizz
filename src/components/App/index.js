@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "../Header";
 import Landing from "../Landing";
 import Footer from "../Footer";
@@ -9,17 +10,19 @@ import "../../App.css";
 
 function App() {
   return (
-    <div>
+    <BrowserRouter>
       <Header />
 
-      <Welcome />
-      <Landing />
-      <Login />
-      <Signup />
-      <ErrorPage />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
 
       <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
 

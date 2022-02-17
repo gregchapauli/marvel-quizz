@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FirebaseContext } from "../Firebase";
 
 const Signup = () => {
@@ -18,6 +20,8 @@ const Signup = () => {
     setloginData({ ...loginData, [e.target.id]: e.target.value });
   };
 
+  const history = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = loginData;
@@ -25,6 +29,8 @@ const Signup = () => {
       .signupUser(email, password)
       .then((user) => {
         setloginData({ ...data });
+        //REDIRECTION VERS LE COMPOSANT WELCOME UNE FOIS INSCRIT (REACT ROUTER V6)
+        history("/welcome");
       })
       .catch((error) => {
         setError(error);
@@ -105,6 +111,11 @@ const Signup = () => {
 
               {btn}
             </form>
+            <div className="linkContainer">
+              <Link className="simpleLink" to="/login">
+                Déjà inscrit? Connectez-vous.
+              </Link>
+            </div>
           </div>
         </div>
       </div>

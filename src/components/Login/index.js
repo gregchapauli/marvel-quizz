@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FirebaseContext } from "../Firebase";
 
 const Login = () => {
+  const firebase = useContext(FirebaseContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [btn, setBtn] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (password.length > 5 && email !== "") {
@@ -14,8 +18,22 @@ const Login = () => {
     }
   }, [password, email, btn]);
 
+  const history = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    firebase
+      .loginUser(email, password)
+      .then((user) => {
+        setEmail("");
+        setPassword("");
+        history("/welcome");
+      })
+      .catch((error) => {
+        setError(error);
+        setEmail("");
+        setPassword("");
+      });
   };
 
   return (
@@ -25,6 +43,8 @@ const Login = () => {
         <div className="formBoxLeftLogin"></div>
         <div className="formBoxRight">
           <div className="formContent">
+            {error !== "" && <span>{error.message}</span>}
+
             <h2>Connexion</h2>
             <form onSubmit={handleSubmit}>
               <div className="inputBox">

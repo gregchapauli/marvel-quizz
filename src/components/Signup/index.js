@@ -15,6 +15,8 @@ const Signup = () => {
   const [loginData, setloginData] = useState(data);
   const [error, setError] = useState("");
 
+  const { pseudo, email, password, confirmPassword } = loginData;
+
   const handleChange = (e) => {
     setloginData({ ...loginData, [e.target.id]: e.target.value });
   };
@@ -23,10 +25,17 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = loginData;
+    //const { email, password } = loginData;
     firebase
       .signupUser(email, password)
-      .then((user) => {
+      //EXPORT DES DONNEES UTILISATEURS VERS BDD FIRESTORE
+      .then((authUser) => {
+        return firebase.user(authUser.user.uid).set({
+          pseudo,
+          email,
+        });
+      })
+      .then(() => {
         setloginData({ ...data });
         //REDIRECTION VERS LE COMPOSANT WELCOME UNE FOIS INSCRIT (REACT ROUTER V6)
         history("/welcome");
@@ -36,8 +45,6 @@ const Signup = () => {
         setloginData({ ...data });
       });
   };
-
-  const { pseudo, email, password, confirmPassword } = loginData;
 
   const btn =
     pseudo === "" ||

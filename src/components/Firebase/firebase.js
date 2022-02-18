@@ -1,5 +1,6 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDOw_cs0KHL3Mwq2e_o5zbtVwe01NNOIew",
@@ -14,6 +15,7 @@ class Firebase {
   constructor() {
     firebase.initializeApp(firebaseConfig);
     this.auth = firebase.auth();
+    this.db = firebase.firestore();
   }
   //INSCRIPTION
   signupUser = (email, password) =>
@@ -28,6 +30,9 @@ class Firebase {
 
   //RECUPERATION DU MOT DE PASSE
   passwordReset = (email) => this.auth.sendPasswordResetEmail(email);
+
+  //CONNEXION A LA BDD FIRESTORE
+  user = (uid) => this.db.doc(`users/${uid}`);
 }
 
 export default Firebase;

@@ -8,6 +8,7 @@ const Welcome = () => {
   const firebase = useContext(FirebaseContext);
 
   const [userSession, setUserSession] = useState(null);
+  const [userData, setUserData] = useState({});
 
   const history = useNavigate();
 
@@ -16,10 +17,27 @@ const Welcome = () => {
     let listener = firebase.auth.onAuthStateChanged((user) => {
       user ? setUserSession(user) : history("/");
     });
+
+    //RECUPERATION DE L'ID POUR AFFICHER LE PSEUDO DE L'UTILISATEUR
+    if (!!userSession) {
+      firebase
+        .user(userSession.uid)
+        .get()
+        .then((doc) => {
+          if (doc && doc.exists) {
+            const myData = doc.data();
+            setUserData(myData);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
     return () => {
       listener();
     };
-  }, [firebase.auth, history]);
+  }, [firebase, history, userSession]);
 
   return userSession === null ? (
     <Fragment>
@@ -30,7 +48,7 @@ const Welcome = () => {
     <div className="quiz-bg">
       <div className="container">
         <Logout />
-        <Quiz />
+        <Quiz userData={userData} />
       </div>
     </div>
   );

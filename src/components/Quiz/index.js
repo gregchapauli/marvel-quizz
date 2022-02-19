@@ -13,6 +13,8 @@ class Quiz extends Component {
     question: null,
     options: [],
     idQuestion: 0,
+    btnDisable: true,
+    userAnswer: null,
   };
 
   loadQuestions = (level) => {
@@ -44,12 +46,28 @@ class Quiz extends Component {
     }
   }
 
+  submitAnswer = (selectedAnswer) => {
+    this.setState({
+      userAnswer: selectedAnswer,
+      btnDisable: false,
+    });
+  };
+
   render() {
     //const { pseudo } = this.props.userData;
 
+    //RECUPERATION DES QUESTIONS ET REPONSES DANS L'OBJET quizMarvel
     const displayOptions = this.state.options.map((option, index) => {
       return (
-        <p key={index} className="answerOptions">
+        <p
+          key={index}
+          className={`answerOptions ${
+            this.state.userAnswer === option ? "selected" : null
+          }`}
+          onClick={() => {
+            this.submitAnswer(option);
+          }}
+        >
           {option}
         </p>
       );
@@ -64,7 +82,9 @@ class Quiz extends Component {
 
         <h2>{this.state.question}</h2>
         {displayOptions}
-        <button className="btnSubmit">Suivant</button>
+        <button disabled={this.state.btnDisable} className="btnSubmit">
+          Suivant
+        </button>
       </div>
     );
   }

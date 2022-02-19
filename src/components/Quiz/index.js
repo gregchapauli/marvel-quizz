@@ -169,7 +169,10 @@ class Quiz extends Component {
         <ToastContainer />
 
         <Levels />
-        <ProgressBar />
+        <ProgressBar
+          idQuestion={this.state.idQuestion}
+          maxQuestions={this.state.maxQuestions}
+        />
 
         <h2>{this.state.question}</h2>
         {displayOptions}

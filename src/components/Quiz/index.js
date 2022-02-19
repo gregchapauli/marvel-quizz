@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QuizMarvel } from "../quizMarvel";
 import Levels from "../Levels";
 import ProgressBar from "../ProgressBar";
+import QuizOver from "../QuizOver";
 
 // CE COMPOSANT EST UNE CLASS DANS UN BUT PEDAGOGIQUE
 class Quiz extends Component {
@@ -19,6 +20,7 @@ class Quiz extends Component {
     userAnswer: null,
     score: 0,
     showWelcomeMsg: false,
+    quizEnd: false,
   };
 
   //UTILISATION DU REF DANS UN BUT PEDAGOGIQUE POUR STOCKER DE LA DATA
@@ -48,7 +50,7 @@ class Quiz extends Component {
 
   nextQuestion = () => {
     if (this.state.idQuestion === this.state.maxQuestions - 1) {
-      //END
+      this.gameOver();
     } else {
       this.setState((prevState) => ({
         idQuestion: prevState.idQuestion + 1,
@@ -134,6 +136,12 @@ class Quiz extends Component {
     }
   }
 
+  gameOver = () => {
+    this.setState({
+      quizEnd: true,
+    });
+  };
+
   render() {
     //const { pseudo } = this.props.userData;
 
@@ -154,8 +162,10 @@ class Quiz extends Component {
       );
     });
 
-    return (
-      <div>
+    return this.state.quizEnd ? (
+      <QuizOver />
+    ) : (
+      <Fragment>
         <ToastContainer />
 
         <Levels />
@@ -170,7 +180,7 @@ class Quiz extends Component {
         >
           Suivant
         </button>
-      </div>
+      </Fragment>
     );
   }
 }

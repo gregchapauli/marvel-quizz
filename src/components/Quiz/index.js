@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { QuizMarvel } from "../quizMarvel";
 import Levels from "../Levels";
 import ProgressBar from "../ProgressBar";
@@ -16,6 +18,7 @@ class Quiz extends Component {
     btnDisable: true,
     userAnswer: null,
     score: 0,
+    showWelcomeMsg: false,
   };
 
   //UTILISATION DU REF DANS UN BUT PEDAGOGIQUE POUR STOCKER DE LA DATA
@@ -57,6 +60,55 @@ class Quiz extends Component {
       this.setState((prevState) => ({
         score: prevState.score + 1,
       }));
+      //NOTIFICATIONS
+      toast.success("Bravo +1", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        bodyClassName: "toastify-color-welcome",
+      });
+    } else {
+      toast.error("Raté 0", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        bodyClassName: "toastify-color-welcome",
+      });
+    }
+  };
+
+  submitAnswer = (selectedAnswer) => {
+    this.setState({
+      userAnswer: selectedAnswer,
+      btnDisable: false,
+    });
+  };
+
+  //NOTIFICATION DE BIENVENUE
+  showWelcomeMsg = (pseudo) => {
+    if (!this.state.showWelcomeMsg) {
+      this.setState({
+        showWelcomeMsg: true,
+      });
+
+      toast.warn(`Bienvenue ${pseudo}, et bonne chance!`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        bodyClassName: "toastify-color-welcome",
+      });
     }
   };
 
@@ -67,7 +119,6 @@ class Quiz extends Component {
         options: this.state.storedQuestions[this.state.idQuestion].options,
       });
     }
-
     // MISE A JOUR DES QUESTIONS QUAND LE STATE A CHANGE
     if (this.state.idQuestion !== prevState.idQuestion) {
       this.setState({
@@ -77,14 +128,11 @@ class Quiz extends Component {
         btnDisable: true,
       });
     }
-  }
 
-  submitAnswer = (selectedAnswer) => {
-    this.setState({
-      userAnswer: selectedAnswer,
-      btnDisable: false,
-    });
-  };
+    if (this.props.userData.pseudo) {
+      this.showWelcomeMsg(this.props.userData.pseudo);
+    }
+  }
 
   render() {
     //const { pseudo } = this.props.userData;
@@ -108,7 +156,7 @@ class Quiz extends Component {
 
     return (
       <div>
-        {/*<h2>Pseudo: {pseudo}</h2>*/}
+        <ToastContainer />
 
         <Levels />
         <ProgressBar />

@@ -23,7 +23,6 @@ class Quiz extends Component {
 
   loadQuestions = (level) => {
     const fetchedArrayQuiz = QuizMarvel[0].quizz[level];
-    console.log(fetchedArrayQuiz);
     if (fetchedArrayQuiz.length >= this.state.maxQuestions) {
       //STOCKAGE DU TABLEAU DANS LE REF
       this.storedDataRef.current = fetchedArrayQuiz;
@@ -52,10 +51,11 @@ class Quiz extends Component {
         idQuestion: prevState.idQuestion + 1,
       }));
     }
+    //GESTION DU SCORE
     const goodAnswer = this.storedDataRef.current[this.state.idQuestion].answer;
     if (this.state.userAnswer === goodAnswer) {
       this.setState((prevState) => ({
-        score: this.prevState.score + 1,
+        score: prevState.score + 1,
       }));
     }
   };

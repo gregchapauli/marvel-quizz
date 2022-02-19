@@ -178,7 +178,9 @@ class Quiz extends Component {
           className="btnSubmit"
           onClick={this.nextQuestion}
         >
-          Suivant
+          {this.state.idQuestion < this.state.maxQuestions - 1
+            ? "Suivant"
+            : "Terminer"}
         </button>
       </Fragment>
     );

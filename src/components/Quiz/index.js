@@ -162,8 +162,8 @@ class Quiz extends Component {
       );
     });
 
-    return this.state.quizEnd ? (
-      <QuizOver />
+    return !this.state.quizEnd ? (
+      <QuizOver ref={this.storedDataRef} />
     ) : (
       <Fragment>
         <ToastContainer />

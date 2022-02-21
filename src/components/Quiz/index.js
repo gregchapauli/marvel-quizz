@@ -21,6 +21,7 @@ class Quiz extends Component {
     score: 0,
     showWelcomeMsg: false,
     quizEnd: false,
+    percent: 0,
   };
 
   //UTILISATION DU REF DANS UN BUT PEDAGOGIQUE POUR STOCKER DE LA DATA
@@ -136,15 +137,32 @@ class Quiz extends Component {
     }
   }
 
+  getPercentage = (maxQuest, ourScore) => {
+    // eslint-disable-next-line no-unused-expressions
+    (ourScore / maxQuest) * 100;
+  };
+
   gameOver = () => {
-    this.setState({
-      quizEnd: true,
-    });
+    const greatPercent = this.getPercentage(
+      this.state.maxQuestions,
+      this.state.score
+    );
+
+    if (greatPercent >= 50) {
+      this.setState({
+        quizLevel: this.state.quizLevel + 1,
+        percent: greatPercent,
+        quizEnd: true,
+      });
+    } else {
+      this.setState({
+        percent: greatPercent,
+        quizEnd: true,
+      });
+    }
   };
 
   render() {
-    //const { pseudo } = this.props.userData;
-
     //RECUPERATION DES QUESTIONS ET REPONSES DANS L'OBJET quizMarvel
     const displayOptions = this.state.options.map((option, index) => {
       return (
@@ -163,7 +181,15 @@ class Quiz extends Component {
     });
 
     return !this.state.quizEnd ? (
-      <QuizOver ref={this.storedDataRef} />
+      <QuizOver
+        //PROPS A RENVOYER VERS LE COMPOSANT QuizOver
+        ref={this.storedDataRef}
+        levelNames={this.state.levelNames}
+        score={this.state.score}
+        maxQuestions={this.state.maxQuestions}
+        quizLevel={this.state.quizLevel}
+        percent={this.state.percent}
+      />
     ) : (
       <Fragment>
         <ToastContainer />
@@ -175,7 +201,9 @@ class Quiz extends Component {
         />
 
         <h2>{this.state.question}</h2>
+
         {displayOptions}
+
         <button
           disabled={this.state.btnDisable}
           className="btnSubmit"

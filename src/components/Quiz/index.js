@@ -8,24 +8,30 @@ import QuizOver from "../QuizOver";
 
 // CE COMPOSANT EST UNE CLASS DANS UN BUT PEDAGOGIQUE
 class Quiz extends Component {
-  state = {
-    levelNames: ["debutant", "confirme", "expert"],
-    quizLevel: 0,
-    maxQuestions: 10,
-    storedQuestions: [],
-    question: null,
-    options: [],
-    idQuestion: 0,
-    btnDisable: true,
-    userAnswer: null,
-    score: 0,
-    showWelcomeMsg: false,
-    quizEnd: false,
-    percent: 0,
-  };
+  constructor(props) {
+    super(props);
 
-  //UTILISATION DU REF DANS UN BUT PEDAGOGIQUE POUR STOCKER DE LA DATA
-  storedDataRef = React.createRef();
+    this.initialState = {
+      levelNames: ["debutant", "confirme", "expert"],
+      quizLevel: 0,
+      maxQuestions: 10,
+      storedQuestions: [],
+      question: null,
+      options: [],
+      idQuestion: 0,
+      btnDisable: true,
+      userAnswer: null,
+      score: 0,
+      showWelcomeMsg: false,
+      quizEnd: false,
+      percent: 0,
+    };
+
+    this.state = this.initialState;
+
+    //UTILISATION DU REF DANS UN BUT PEDAGOGIQUE POUR STOCKER DE LA DATA
+    this.storedDataRef = React.createRef();
+  }
 
   loadQuestions = (level) => {
     const fetchedArrayQuiz = QuizMarvel[0].quizz[level];
@@ -96,7 +102,7 @@ class Quiz extends Component {
   };
 
   //NOTIFICATION DE BIENVENUE
-  showWelcomeMsg = (pseudo) => {
+  showToastMsg = (pseudo) => {
     if (!this.state.showWelcomeMsg) {
       this.setState({
         showWelcomeMsg: true,
@@ -116,14 +122,20 @@ class Quiz extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.storedQuestions !== prevState.storedQuestions) {
+    if (
+      this.state.storedQuestions !== prevState.storedQuestions &&
+      this.state.storedQuestions.length
+    ) {
       this.setState({
         question: this.state.storedQuestions[this.state.idQuestion].question,
         options: this.state.storedQuestions[this.state.idQuestion].options,
       });
     }
     // MISE A JOUR DES QUESTIONS QUAND LE STATE A CHANGE
-    if (this.state.idQuestion !== prevState.idQuestion) {
+    if (
+      this.state.idQuestion !== prevState.idQuestion &&
+      this.state.storedQuestions.length
+    ) {
       this.setState({
         question: this.state.storedQuestions[this.state.idQuestion].question,
         options: this.state.storedQuestions[this.state.idQuestion].options,
@@ -132,8 +144,8 @@ class Quiz extends Component {
       });
     }
 
-    if (this.props.userData.pseudo) {
-      this.showWelcomeMsg(this.props.userData.pseudo);
+    if (this.props.userData.pseudo !== prevProps.userData.pseudo) {
+      this.showToastMsg(this.props.userData.pseudo);
     }
   }
 
@@ -147,7 +159,6 @@ class Quiz extends Component {
       this.state.maxQuestions,
       this.state.score
     );
-    console.log(greatPercent);
 
     if (greatPercent >= 50) {
       this.setState({
@@ -161,6 +172,11 @@ class Quiz extends Component {
         quizEnd: true,
       });
     }
+  };
+
+  loadLevelQuestions = (param) => {
+    this.setState({ ...this.initialState, quizLevel: param });
+    this.loadQuestions(this.state.levelNames[param]);
   };
 
   render() {
@@ -190,6 +206,7 @@ class Quiz extends Component {
         maxQuestions={this.state.maxQuestions}
         quizLevel={this.state.quizLevel}
         percent={this.state.percent}
+        loadLevelQuestions={this.loadLevelQuestions}
       />
     ) : (
       <Fragment>

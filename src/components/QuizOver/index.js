@@ -1,7 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
 
 const QuizOver = React.forwardRef((props, ref) => {
-  const { levelNames, score, maxQuestions, quizLevel, percent } = props;
+  const {
+    levelNames,
+    score,
+    maxQuestions,
+    quizLevel,
+    percent,
+    loadLevelQuestions,
+  } = props;
   const [asked, setAsked] = useState([]);
 
   useEffect(() => {
@@ -9,6 +16,19 @@ const QuizOver = React.forwardRef((props, ref) => {
   }, [ref]);
 
   const averageGrade = maxQuestions / 2;
+
+  if (score < averageGrade) {
+    // POUR RECOMMENCER LE QUIZ DEPUIS LE DEBUT EN CAS D'ECHEC
+    /*setTimeout(() => {
+      loadLevelQuestions(0);
+    }, 3000);*/
+
+    // POUR RECOMMENCER LE QUIZZ AU DERNIER NIVEAU EN CAS D'ECHEC
+    setTimeout(() => {
+      loadLevelQuestions(quizLevel);
+    }, 3000);
+  }
+
   const decision =
     score >= averageGrade ? (
       <Fragment>
@@ -16,12 +36,22 @@ const QuizOver = React.forwardRef((props, ref) => {
           {quizLevel < levelNames.length ? (
             <Fragment>
               <p className="successMsg">Bravo, passez au niveau suivant!</p>
-              <button className="btnResult success">Niveau suivant</button>
+              <button
+                className="btnResult success"
+                onClick={() => loadLevelQuestions(quizLevel)}
+              >
+                Niveau suivant
+              </button>
             </Fragment>
           ) : (
             <Fragment>
               <p className="successMsg">Bravo, vous êtes un expert!</p>
-              <button className="btnResult gameOver">Niveau suivant</button>
+              <button
+                className="btnResult gameOver"
+                onClick={() => loadLevelQuestions(0)}
+              >
+                Accueil
+              </button>
             </Fragment>
           )}
         </div>
@@ -63,6 +93,7 @@ const QuizOver = React.forwardRef((props, ref) => {
     ) : (
       <tr>
         <td colSpan="3">
+          <div className="loader"></div>
           <p style={{ textAlign: "center", color: "red" }}>Pas de réponses!</p>
         </td>
       </tr>

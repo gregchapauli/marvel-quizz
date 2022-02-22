@@ -138,8 +138,8 @@ class Quiz extends Component {
   }
 
   getPercentage = (maxQuest, ourScore) => {
-    // eslint-disable-next-line no-unused-expressions
-    (ourScore / maxQuest) * 100;
+    let result = (ourScore / maxQuest) * 100;
+    return result;
   };
 
   gameOver = () => {
@@ -147,6 +147,7 @@ class Quiz extends Component {
       this.state.maxQuestions,
       this.state.score
     );
+    console.log(greatPercent);
 
     if (greatPercent >= 50) {
       this.setState({
@@ -180,7 +181,7 @@ class Quiz extends Component {
       );
     });
 
-    return !this.state.quizEnd ? (
+    return this.state.quizEnd ? (
       <QuizOver
         //PROPS A RENVOYER VERS LE COMPOSANT QuizOver
         ref={this.storedDataRef}

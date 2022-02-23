@@ -57,7 +57,9 @@ class Quiz extends Component {
 
   nextQuestion = () => {
     if (this.state.idQuestion === this.state.maxQuestions - 1) {
-      this.gameOver();
+      this.setState({
+        quizEnd: true,
+      });
     } else {
       this.setState((prevState) => ({
         idQuestion: prevState.idQuestion + 1,
@@ -144,6 +146,14 @@ class Quiz extends Component {
       });
     }
 
+    if (this.state.quizEnd !== prevState.quizEnd) {
+      const greatPercent = this.getPercentage(
+        this.state.maxQuestions,
+        this.state.score
+      );
+      this.gameOver(greatPercent);
+    }
+
     if (this.props.userData.pseudo !== prevProps.userData.pseudo) {
       this.showToastMsg(this.props.userData.pseudo);
     }
@@ -154,23 +164,14 @@ class Quiz extends Component {
     return result;
   };
 
-  gameOver = () => {
-    const greatPercent = this.getPercentage(
-      this.state.maxQuestions,
-      this.state.score
-    );
-
-    if (greatPercent >= 50) {
+  gameOver = (percent) => {
+    if (percent >= 50) {
       this.setState({
         quizLevel: this.state.quizLevel + 1,
-        percent: greatPercent,
-        quizEnd: true,
+        percent,
       });
     } else {
-      this.setState({
-        percent: greatPercent,
-        quizEnd: true,
-      });
+      this.setState({ percent });
     }
   };
 

@@ -5,6 +5,7 @@ import { QuizMarvel } from "../quizMarvel";
 import Levels from "../Levels";
 import ProgressBar from "../ProgressBar";
 import QuizOver from "../QuizOver";
+import { FaChevronRight } from "react-icons/fa";
 
 // CE COMPOSANT EST UNE CLASS DANS UN BUT PEDAGOGIQUE
 class Quiz extends Component {
@@ -193,6 +194,7 @@ class Quiz extends Component {
             this.submitAnswer(option);
           }}
         >
+          <FaChevronRight />
           {option}
         </p>
       );

@@ -10,6 +10,7 @@ const QuizOver = React.forwardRef((props, ref) => {
     percent,
     loadLevelQuestions,
   } = props;
+
   const [asked, setAsked] = useState([]);
 
   useEffect(() => {
@@ -19,15 +20,8 @@ const QuizOver = React.forwardRef((props, ref) => {
   const averageGrade = maxQuestions / 2;
 
   if (score < averageGrade) {
-    // POUR RECOMMENCER LE QUIZ DEPUIS LE DEBUT EN CAS D'ECHEC
-    /*setTimeout(() => {
-      loadLevelQuestions(0);
-    }, 3000);*/
-
     // POUR RECOMMENCER LE QUIZZ AU DERNIER NIVEAU EN CAS D'ECHEC
-    setTimeout(() => {
-      loadLevelQuestions(quizLevel);
-    }, 3000);
+    setTimeout(() => loadLevelQuestions(quizLevel), 3000);
   }
 
   const decision =

@@ -3,6 +3,7 @@ import Logout from "../Logout";
 import Quiz from "../Quiz";
 import { FirebaseContext } from "../Firebase";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const Welcome = () => {
   const firebase = useContext(FirebaseContext);
@@ -40,10 +41,10 @@ const Welcome = () => {
   }, [firebase, history, userSession]);
 
   return userSession === null ? (
-    <Fragment>
-      <div className="loader"></div>
-      <p className="loaderText">Loading...</p>
-    </Fragment>
+    <Loader
+      loadingMsg={"Authentification..."}
+      styling={{ textAlign: "center", color: "#FFFFFF" }}
+    />
   ) : (
     <div className="quiz-bg">
       <div className="container">

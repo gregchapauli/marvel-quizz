@@ -25,7 +25,24 @@ const QuizOver = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     setAsked(ref.current);
+
+    if (localStorage.getItem("marvelStorageDate")) {
+      const date = localStorage.getItem("marvelStorageDate");
+      checkDataAge(date);
+    }
   }, [ref]);
+
+  const checkDataAge = (date) => {
+    const today = Date.now();
+    const timeDifference = today - date;
+
+    const daysDifference = timeDifference / (1000 * 3600 * 24);
+
+    if (daysDifference >= 15) {
+      localStorage.clear();
+      localStorage.setItem("marvelStorageDate", Date.now());
+    }
+  };
 
   const showModal = (id) => {
     setOpenModal(true);

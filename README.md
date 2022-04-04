@@ -1,4 +1,4 @@
-<center><h1>Marvel-Quiz</h1></center>
+# Marvel-Quiz
 
 Marvel-Quiz is a small React JS Web App using advanced skills like Hooks, React-Router and API. This app is builded with Firebase and uses Firestore cloud functions !
 
@@ -41,3 +41,9 @@ After this, let's get coding.
 * [React Tooltip](https://www.npmjs.com/package/react-tooltip) - Easy and customizable tooltips
 
 ## Copyright
+
+* The icons Wolverines, Iron-man, Spider-man et Batman come from "iconFinder.com".
+
+## Remerciements
+
+* Thanks to DonkeyGeek for your your React course and your precious advices.

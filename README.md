@@ -1,17 +1,18 @@
 <center><h1>Marvel-Quiz</h1></center>
 
-Marvel-Quiz is a small React JS application using advanced skills like Hooks, React-Router and API. This app is builded with Firebase and use Firestore cloud functions !
+Marvel-Quiz is a small React JS Web App using advanced skills like Hooks, React-Router and API. This app is builded with Firebase and uses Firestore cloud functions !
 
 ## Description
 
 After learning HTML/CSS and Javascript (ES6), 
-my objective was to learn ReactJs coding a simple but complete webApp from scracth.
-I choose this one because I love Marvel universe and it looks cool!
+my objective was to learn ReactJs coding a simple but complete webApp from scratch.
+I choose this theme because I love Marvel universe and it looks cool!
 
 To do it, I had to learn React basics
-* components concept
+* Components concept
 * how to initialize an app
 * what are props and states
+* Class and functions
 * Destructuring
 * Component's lifecycles
 * PureComponent

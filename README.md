@@ -46,6 +46,10 @@ After each answer, a notification appear and tell you if you are right or wrong.
 
 At the end of each level, a board appear withb the result:
 
+![MarvelQuizzRecap](https://user-images.githubusercontent.com/60263116/161550568-05e5654d-3436-4eb2-9c2e-31dd905ade24.png)
+
+By clicking on the infos button, an API give you more information about the answer:
+
 
 
 ## Project resources & dependencies

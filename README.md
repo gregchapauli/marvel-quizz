@@ -1,14 +1,26 @@
-# Marvel-Quiz
+<center><h1>Marvel-Quiz</h1></center>
 
-Marvel-Quiz is a small React JS application
+Marvel-Quiz is a small React JS application using advanced skills like Hooks, React-Router and API. This app is builded with Firebase and use Firestore cloud functions !
 
-### Prerequisites
+## Description
 
-* HTML / css
-* JavaScript (ES6 +)
-* React JS basics (Check the 2 links below)
-* [Formation REACT JS pour Débutants](https://www.youtube.com/playlist?list=PLmYBIzXGbEzLhBgbGa7ucqGJr5RgmzjWr)
-* [React HOOKS](https://www.youtube.com/playlist?list=PLmYBIzXGbEzIAGkcwOcIW4rHHvp2SlU5s)
+After learning HTML/CSS and Javascript (ES6), 
+my objective was to learn ReactJs coding a simple but complete webApp from scracth.
+I choose this one because I love Marvel universe and it looks cool!
+
+To do it, I had to learn React basics
+* components concept
+* how to initialize an app
+* what are props and states
+* Destructuring
+* Component's lifecycles
+* PureComponent
+* High Order component
+* And a lot of other concepts ...
+
+Then I learned new concepts in react V17 with Hooks !!!
+
+After this, let's get coding.
 
 ## Project resources & dependencies
 
@@ -26,3 +38,5 @@ Marvel-Quiz is a small React JS application
 * [React Stepper Horizontal](https://www.npmjs.com/package/stepper-horizontal) - Well-designed stepper component for react
 * [React Toastify](https://www.npmjs.com/package/stepper-horizontal) - Easy and customizable notifications
 * [React Tooltip](https://www.npmjs.com/package/react-tooltip) - Easy and customizable tooltips
+
+## Copyright

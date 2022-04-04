@@ -39,6 +39,13 @@ Once done, you can connect yourself to the app:
 
 Then, the Quizz start:
 
+![MarvelQuizzQuizz](https://user-images.githubusercontent.com/60263116/161549429-e9a53c74-0555-4ebe-b159-7d696e90cd15.png)
+
+As you can see, you have a progress bar and three levels. Of course, you need to success a level to progress to the next one.
+After each answer, a notification appear and tell you if you are right or wrong.
+
+At the end of each level, a board appear withb the result:
+
 
 
 ## Project resources & dependencies

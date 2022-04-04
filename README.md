@@ -29,15 +29,17 @@ After this, let's get coding.
 
 First, the page is full responsive. On the landing page, you can see a very cool animation when you switch between the two buttons.
 
-Now you can susbcribe by clicking on the left button.
+Now you can susbcribe by clicking on the left button:
 
 ![MarvelQuizzSubscribe](https://user-images.githubusercontent.com/60263116/161547840-7f56ed58-ee34-47d9-bfba-b028cf25de85.png)
 
-Once done, you can connect yourself to the app
+Once done, you can connect yourself to the app:
 
 ![MarvelQuizzConnexion](https://user-images.githubusercontent.com/60263116/161548244-23a18735-b9bd-4e41-96d8-7a2284f8ee01.png)
 
-Then, the Quizz start...
+Then, the Quizz start:
+
+
 
 ## Project resources & dependencies
 

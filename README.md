@@ -2,7 +2,9 @@
 
 Marvel-Quiz is a small React JS Web App using advanced skills like Hooks, React-Router and API. This app is builded with Firebase and uses Firestore cloud functions !
 
-## Description
+![MarvelQuizzLanding](https://user-images.githubusercontent.com/60263116/161545532-4709936d-111d-48cd-b0ad-84406c5af08a.png)
+
+## Why this project ?
 
 After learning HTML/CSS and Javascript (ES6), 
 my objective was to learn ReactJs coding a simple but complete webApp from scratch.
@@ -22,6 +24,12 @@ To do it, I had to learn React basics
 Then I learned new concepts in react V17 with Hooks !!!
 
 After this, let's get coding.
+
+## Description
+
+First, the page is full responsive. On the landing page, you can see a very cool animation when you switch between the two buttons.
+
+Now you can susbcribe by clicking on the left button.
 
 ## Project resources & dependencies
 
